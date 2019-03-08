@@ -1,0 +1,38 @@
+# Vending Machine
+
+To start using it run `bin/irb`. This will create an interactive ruby console where you can create coins, products and vending machines.
+
+Example Configuration: 
+```
+diet_coke = Product.new('Diet Coke', 1)
+mars_bar = Product.new('Mars Bar', 0.6)
+apple = Product.new('Apple', 0.32)
+
+one_p = Coin.new(0.01)
+two_p = Coin.new(0.02)
+five_p = Coin.new(0.05)
+ten_p = Coin.new(0.10)
+twenty_p = Coin.new(0.20)
+fifty_p = Coin.new(0.50)
+one_pound = Coin.new(1.00)
+two_pounds = Coin.new(2.00)
+
+products = {
+  diet_coke => 10,
+  mars_bar => 7,
+  apple => 10
+}
+
+change = {
+  one_p => 20,
+  two_p => 20,
+  five_p => 20,
+  ten_p => 15,
+  twenty_p => 15,
+  fifty_p => 10,
+  one_pound => 5,
+  two_pounds => 0
+}
+
+vm = VendingMachine.new(products, change)
+```
