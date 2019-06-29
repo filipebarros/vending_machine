@@ -3,20 +3,24 @@
 require 'product'
 
 RSpec.describe Product do
-  context '#new' do
-    let(:name) { 'Diet Coke' }
+  describe '#new' do
     subject(:product) { described_class.new(name, price) }
 
-    describe 'it creates a new product' do
+    let(:name) { 'Diet Coke' }
+
+    context 'when a new product is created' do
       let(:price) { 0.98 }
 
-      it 'the given name and a price' do
+      it 'has a given name' do
         expect(product.name).to be 'Diet Coke'
+      end
+
+      it 'has a price' do
         expect(product.price).to be 0.98
       end
     end
 
-    describe 'when price is zero' do
+    context 'when price is zero' do
       let(:price) { 0.0 }
 
       it 'throws error' do
@@ -24,7 +28,7 @@ RSpec.describe Product do
       end
     end
 
-    describe 'when price is negative' do
+    context 'when price is negative' do
       let(:price) { -0.98 }
 
       it 'throws error' do

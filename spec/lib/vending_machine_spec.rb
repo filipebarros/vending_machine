@@ -4,40 +4,49 @@ require 'coin'
 require 'product'
 require 'vending_machine'
 
-require 'pry'
-
 RSpec.describe VendingMachine do
   subject(:vending_machine) { described_class.new(products, change) }
 
-  context '#new' do
-    describe 'when products and change are not provided' do
+  describe '#new' do
+    context 'when products are not provided' do
       let(:products) { {} }
+
+      it 'creates a vending machine without products' do
+        expect(vending_machine.products).to eq({})
+      end
+    end
+
+    context 'when change is not provided' do
       let(:change) { {} }
 
-      it 'creates an empty vending machine' do
-        expect(vending_machine.products).to eq({})
+      it 'creates a vending machine without change' do
         expect(vending_machine.change).to eq({})
       end
     end
 
-    describe 'when products and change are provided' do
+    context 'when products are provided' do
       let(:chocolate_bar) { Product.new('Chocolate Bar', 0.98) }
       let(:products) { { chocolate_bar => 1 } }
 
+      it 'adds the products to the vending machine' do
+        expect(vending_machine.products).to eq(products)
+      end
+    end
+
+    context 'when change is provided' do
       let(:one_p_coin) { Coin.new(0.01) }
       let(:change) { { one_p_coin => 10 } }
 
-      it 'creates an empty vending machine' do
-        expect(vending_machine.products).to eq(products)
+      it 'adds the change to the vending machine' do
         expect(vending_machine.change).to eq(change)
       end
     end
   end
 
-  context '#buy' do
+  describe '#buy' do
     subject(:buy) { vending_machine.buy(product, introduced_money) }
 
-    describe 'when product does not exist in the machine' do
+    context 'when product does not exist in the machine' do
       let(:product) { Product.new('Chocolate Bar', 0.98) }
       let(:products) { {} }
 
@@ -51,7 +60,7 @@ RSpec.describe VendingMachine do
       end
     end
 
-    describe 'when not enough money is provided' do
+    context 'when not enough money is provided' do
       let(:product) { Product.new('Chocolate Bar', 0.98) }
       let(:products) { { product => 1 } }
 
@@ -65,7 +74,7 @@ RSpec.describe VendingMachine do
       end
     end
 
-    describe 'when enough money is provided but no change available' do
+    context 'when enough money is provided but no change available' do
       let(:product) { Product.new('Chocolate Bar', 0.98) }
       let(:products) { { product => 1 } }
 
@@ -80,7 +89,7 @@ RSpec.describe VendingMachine do
       end
     end
 
-    describe 'when enough money is provided and one coin of change is available' do
+    context 'when enough money is provided and one coin of change is available' do
       let(:product) { Product.new('Chocolate bar', 0.98) }
       let(:products) { { product => 1 } }
 
@@ -98,7 +107,7 @@ RSpec.describe VendingMachine do
       end
     end
 
-    describe 'when enough money is provided and change is available' do
+    context 'when enough money is provided and change is available' do
       let(:product) { Product.new('Chocolate Bar', 0.92) }
       let(:products) { { product => 1 } }
 
@@ -119,7 +128,7 @@ RSpec.describe VendingMachine do
     end
   end
 
-  context '#add_change' do
+  describe '#add_change' do
     subject(:add_change) { vending_machine.add_change(new_change) }
 
     let(:product) { Product.new('Chocolate bar', 0.98) }
@@ -127,7 +136,7 @@ RSpec.describe VendingMachine do
     let(:one_pound_coin) { Coin.new(1.00) }
     let(:change) { { one_pound_coin => 3 } }
 
-    describe 'when adding a coin that does not exist' do
+    context 'when adding a coin that does not exist' do
       let(:one_p_coin) { Coin.new(0.01) }
       let(:new_change) { { one_p_coin => 10 } }
 
@@ -138,7 +147,7 @@ RSpec.describe VendingMachine do
       end
     end
 
-    describe 'when adding a coin that already exists' do
+    context 'when adding a coin that already exists' do
       let(:new_change) { { one_pound_coin => 10 } }
 
       it 'sums the amount of coins added to the previously existing' do
@@ -149,7 +158,7 @@ RSpec.describe VendingMachine do
     end
   end
 
-  context '#add_product' do
+  describe '#add_product' do
     subject(:add_products) { vending_machine.add_products(new_products) }
 
     let(:chocolate_bar) { Product.new('Chocolate bar', 0.98) }
@@ -157,7 +166,7 @@ RSpec.describe VendingMachine do
     let(:one_pound_coin) { Coin.new(1.00) }
     let(:change) { { one_pound_coin => 3 } }
 
-    describe 'when adding a product that does not exist' do
+    context 'when adding a product that does not exist' do
       let(:diet_coke) { Product.new('Diet Coke', 1.01) }
       let(:new_products) { { diet_coke => 10 } }
 
@@ -168,7 +177,7 @@ RSpec.describe VendingMachine do
       end
     end
 
-    describe 'when adding a product that already exists' do
+    context 'when adding a product that already exists' do
       let(:new_products) { { chocolate_bar => 10 } }
 
       it 'sums the amount of products added to the previously existing' do

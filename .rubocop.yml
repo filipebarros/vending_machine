@@ -1,0 +1,31 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  DisplayCopNames: true
+
+Metrics/LineLength:
+  Max: 120
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - 'lib/vending_machine.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/vending_machine.rb'
+
+Metrics/ParameterLists:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/lib/vending_machine_spec.rb'

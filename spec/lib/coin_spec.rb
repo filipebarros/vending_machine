@@ -3,7 +3,7 @@
 require 'coin'
 
 RSpec.describe Coin do
-  context '#new' do
+  describe '#new' do
     subject(:coin) { described_class.new(value) }
 
     described_class::ACCEPTED_VALUES.each do |value|
