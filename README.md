@@ -1,5 +1,7 @@
 # Vending Machine
 
+[![Build Status](https://cloud.drone.io/api/badges/filipebarros/vending_machine/status.svg)](https://cloud.drone.io/filipebarros/vending_machine)
+
 To start using it run `bin/irb`. This will create an interactive ruby console where you can create coins, products and vending machines.
 
 Example Configuration: 
