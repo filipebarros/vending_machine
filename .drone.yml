@@ -1,0 +1,32 @@
+kind: pipeline
+name: default
+
+steps:
+- name: install
+  image: ruby:2.6-alpine3.10
+  volumes:
+  - name: gems
+    path: /root/.gems
+  commands:
+    - gem install bundler
+    = bundle install
+
+- name: lint
+  image: ruby:2.6-alpine3.10
+  volumes:
+  - name: gems
+    path: /root/.gems
+  commands:
+  - bundle exec rubocop
+
+- name: test
+  image: ruby:2.6-alpine3.10
+  volumes:
+  - name: gems
+    path: /root/.gems
+  commands:
+  - bundle exec rspec
+
+volumes:
+- name: gems
+  temp: {}
