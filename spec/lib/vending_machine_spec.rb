@@ -8,17 +8,16 @@ RSpec.describe VendingMachine do
   subject(:vending_machine) { described_class.new(products, change) }
 
   describe '#new' do
-    context 'when products are not provided' do
-      let(:products) { {} }
+    let(:products) { {} }
+    let(:change) { {} }
 
+    context 'when products are not provided' do
       it 'creates a vending machine without products' do
         expect(vending_machine.products).to eq({})
       end
     end
 
     context 'when change is not provided' do
-      let(:change) { {} }
-
       it 'creates a vending machine without change' do
         expect(vending_machine.change).to eq({})
       end
